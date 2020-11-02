@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+ foodbuzz:
+  build: ./
+  image: foodbuzz
+  container_name: fb
+  ports:
+   - "8080:8080"
+  networks:
+   - db-net
+  depends_on:
+   - db
+ db:
+  image: mysql:8.0.22
+  container_name: db
+  environment:
+      MYSQL_ROOT_PASSWORD: secret
+  networks:
+   - db-net
+      
+networks:
+ db-net:
