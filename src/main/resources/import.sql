@@ -1,0 +1,2 @@
+INSERT INTO food (id, name, image) VALUES (1, "Jhal Muri", "https://i.pinimg.com/originals/5d/f8/81/5df88180dc4cc58c76b83bb1878a4203.jpg");
+INSERT INTO food (id, name, image) VALUES (2, "Biriyani", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Biryani_Home.jpg/1200px-Biryani_Home.jpg");
