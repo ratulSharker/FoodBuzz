@@ -16,7 +16,7 @@ This is a sample application demonstrating the containerisation of spring boot a
 This repository is for two achieve two main goals
 
   - Debugging a java application running inside a container.
-  - Instantly reloading the foodbuzz application using spring boot-devtools.
+  - Live reloading the foodbuzz application using spring boot-devtools.
 
 
 ## Running the starter application:
@@ -176,3 +176,116 @@ Now hitting the `/foods` endpoint will start the debugging procedure
 </details>
 
 
+
+
+## Live reload using spring boot dev-tools:
+
+<details>
+	<summary><b>Application setup</b></summary>
+<br/>	
+
+At first spring boot dev-tools related class files needed to be shipped with the **FoodBuzz** application jar. To include dev-tools related class files we need to configure `pom.xml`.
+
+In `pom.xml` file replace
+
+```xml
+<plugin>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-maven-plugin</artifactId>
+</plugin>
+```
+
+with 
+
+```xml
+<plugin>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-maven-plugin</artifactId>
+	<configuration>
+		<excludeDevtools>false</excludeDevtools>
+	</configuration>
+</plugin>
+```
+
+In the `application.properties` declare following
+
+```properties
+spring.devtools.remote.secret=devtools-secret
+```
+
+Now we need to build the jar again using following (make sure you are in the `Starter` directory)
+
+```bash
+mvn clean package
+```
+
+Then rebuild the images (make sure you are in the `FoodBuzz` directory)
+
+```bash
+docker-compose up --build -d
+```
+</details>
+
+<br/>
+<details>
+<summary><b>Connect eclipse spring boot devtools live reload client</b></summary>
+
+NB: To continue with this integration eclipse plugin STS (Spring tool suite) must be installed.
+
+
+#### Step 1:
+
+Right click on the **FoodBuzz** project and goto
+
+```
+Run As > Run Configurations...
+```
+
+![Opening run configuration]( ./screenshots/live-reloading/eclipse/live-reload-eclipse-01.png)
+
+
+
+#### Step 2:
+
+Create new spring boot devtools client
+
+
+![Create devtools client]( ./screenshots/live-reloading/eclipse/live-reload-eclipse-02.png)
+
+
+
+#### Step 3:
+
+Set name, project, remote url, remote secret here. Following things to keep in mind
+
+ - remote url is the url where the application can be accessed.
+ - remote secret is the secret set in the `application.properties`.
+
+
+![Setup devtools client configuration]( ./screenshots/live-reloading/eclipse/live-reload-eclipse-03.png)
+
+
+#### Step 4:
+
+Switch to `Source` tab and remove the `Default` source folder.
+
+
+![Remove the default source]( ./screenshots/live-reloading/eclipse/live-reload-eclipse-04.png)
+
+
+
+#### Step 5:
+
+In the `Source` tab, add **FoodBuzz** source
+
+
+![Add FoodBuzz source path]( ./screenshots/live-reloading/eclipse/live-reload-eclipse-05.png)
+
+
+#### Step 6:
+
+Apply and run the configuration
+
+![Run the configuration]( ./screenshots/live-reloading/eclipse/live-reload-eclipse-06.png)
+
+</details>
