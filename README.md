@@ -4,10 +4,10 @@ This is a sample application demonstrating the containerisation of spring boot a
 
 ```pre
 	|---------|			|----------|
-	|		  |			|		   |
-	|FoodBuzz |			|	Mysql  |
+	|	  |			|	   |
+	|FoodBuzz |			|   Mysql  |
 	|Container|			|Container |
-	|		  |			|		   |
+	|	  |			|	   |
 	|---------|			|----------|
 ```
 
@@ -70,6 +70,8 @@ curl -X GET http://localhost:8080/foods
 
 ## Remote debugging the FoodBuzz application:
 
+### Application setup:
+
 To debug the **FoodBuzz** application remotely, we need to pass some additional parameters while running the **FoodBuzz** jar inside the container. For more information please reffer to this [guide](https://www.baeldung.com/java-application-remote-debugging)
 
 Open the `Dockerfile` inside the `Starter` directory and change below line
@@ -100,7 +102,7 @@ services:
   container_name: fb
   ports:
    - "8080:8080"
-   - "8000:8000"		<---- debugging port mapping to host machine
+   - "8000:8000"		# <---- debugging port mapping to host machine
   networks:
    - db-net
   depends_on:
@@ -123,9 +125,47 @@ Now we are ready to connect the ide (eclipse, inteliJ, Visual studio code) to th
 
 ### Connect eclipse remote debugger to FoodBuzz:
 
+#### Step 1: 
 To connect remote debugger in eclipse right on the **FoodBuzz** project. Navigate to
 
 ```
 'FoodBuzz Project' > Debug As > Debug configurations...
 ```
 
+![Accessing debug configurations]( ./screenshots/remote-debugging/eclipse/Remote-debug-eclipse-1.png)
+
+#### Step 2:
+Now move to the `Remote java Application` in the popup window
+
+![Navigate to Remote Java Appliation]( ./screenshots/remote-debugging/eclipse/Remote-debug-eclipse-2.png)
+
+#### Step 3:
+Then create a new debug configuration. Make sure following things
+
+ - Connection-Type is set to `socket attach`
+ - host to `localhost`
+ - port to `8000` (this port is the debugging port set in the Dockerfile for debugging )
+ 
+![Navigate to Remote Java Appliation]( ./screenshots/remote-debugging/eclipse/Remote-debug-eclipse-3.png)
+
+#### Step 4:
+Now move to the `source` tab, remove the `Default` folder
+
+![Remove default source folder]( ./screenshots/remote-debugging/eclipse/Remote-debug-eclipse-4.png)
+
+
+#### Step 5:
+Set the **FoodBuzz** project folder
+
+![Setting the FoodBuzz source folder]( ./screenshots/remote-debugging/eclipse/Remote-debug-eclipse-5.png)
+
+
+#### Step 6:
+Then click the `Apply` and then start debugging by clicking the `Debug` button. At this point i assume our `docker-compose` is up and running in debugging option in place. Now we will set a breakpoint inside `FoodController`.
+
+![Enable a breakpoint]( ./screenshots/remote-debugging/eclipse/Remote-debug-eclipse-6.png)
+
+#### Step 7:
+Now hitting the `/foods` endpoint will start the debugging procedure
+
+![Start debugging]( ./screenshots/remote-debugging/eclipse/Remote-debug-eclipse-7.png)
