@@ -176,6 +176,25 @@ Now hitting the `/foods` endpoint will start the debugging procedure
 </details>
 
 
+<details>
+<summary><b>Connect VS Code remote debugger to FoodBuzz</b></summary>
+<br/>
+
+Switch to run and debug tab and create `launch.json`. This `launch.json` will contain all the run configuration. For remote debugging add the following:
+
+```json
+{
+    "type": "java",
+    "name": "Debug",
+    "request": "attach",
+    "hostName": "localhost",
+    "port": 8000
+}
+```
+
+Bottom right `Add Configuration...` button may help in case of generating this `attach` type configuration. Run this configuration as debug mode, you will be connected to **FoodBuzz** application debugee.
+
+</details>
 
 
 ## Live reload using spring boot dev-tools:
@@ -226,12 +245,11 @@ docker-compose up --build -d
 ```
 </details>
 
-<br/>
 <details>
 <summary><b>Connect eclipse spring boot devtools live reload client</b></summary>
+<br/>
 
 NB: To continue with this integration eclipse plugin STS (Spring tool suite) must be installed.
-
 
 #### Step 1:
 
@@ -243,16 +261,12 @@ Run As > Run Configurations...
 
 ![Opening run configuration]( ./screenshots/live-reloading/eclipse/live-reload-eclipse-01.png)
 
-
-
 #### Step 2:
 
 Create new spring boot devtools client
 
 
 ![Create devtools client]( ./screenshots/live-reloading/eclipse/live-reload-eclipse-02.png)
-
-
 
 #### Step 3:
 
@@ -264,7 +278,6 @@ Set name, project, remote url, remote secret here. Following things to keep in m
 
 ![Setup devtools client configuration]( ./screenshots/live-reloading/eclipse/live-reload-eclipse-03.png)
 
-
 #### Step 4:
 
 Switch to `Source` tab and remove the `Default` source folder.
@@ -272,20 +285,36 @@ Switch to `Source` tab and remove the `Default` source folder.
 
 ![Remove the default source]( ./screenshots/live-reloading/eclipse/live-reload-eclipse-04.png)
 
-
-
 #### Step 5:
 
 In the `Source` tab, add **FoodBuzz** source
 
-
 ![Add FoodBuzz source path]( ./screenshots/live-reloading/eclipse/live-reload-eclipse-05.png)
-
 
 #### Step 6:
 
 Apply and run the configuration
 
 ![Run the configuration]( ./screenshots/live-reloading/eclipse/live-reload-eclipse-06.png)
+
+</details>
+
+<details>
+<summary><b>VS Code configuration spring boot devtools live reload client</b></summary>
+
+<br/>
+All we need to configure a java launch configuration for spring boot dev tool client application. These [guides](https://docs.spring.io/spring-boot/docs/2.3.5.RELEASE/reference/html/using-spring-boot.html#running-the-remote-client-application) can help setting things up. In the VS code `launch.json`, add following configuration
+
+```json
+{
+    "type": "java",
+    "name": "Devtools",
+    "request": "launch",
+    "mainClass": "org.springframework.boot.devtools.RemoteSpringApplication",
+    "args": "http://localhost:8080"
+}
+```
+
+Run this configuration without debug mode.
 
 </details>
