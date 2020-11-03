@@ -1,6 +1,6 @@
-# FoodBuzz:
+# FoodBuzz
 
-This is a sample application demonstrating the containerisation of spring boot application in development environment. In this project we will build a very basic rest service, fetching data from mysql database. Rest application service and database both will be running within a container build on docker.
+This is a sample application demonstrating the containerisation of spring boot application in development environment. In this project we will look at very basic rest service, fetching data from mysql database. Rest application service and database both will be running within a container build on docker. We will also look at remote debugging and reload container via spring boot dev tools for this containerised application.
 
 ```pre
 	|---------|			|----------|
@@ -70,7 +70,9 @@ curl -X GET http://localhost:8080/foods
 
 ## Remote debugging the FoodBuzz application:
 
-### Application setup:
+<details>
+	<summary><b>Application Setup</b></summary>
+<br>
 
 To debug the **FoodBuzz** application remotely, we need to pass some additional parameters while running the **FoodBuzz** jar inside the container. For more information please reffer to this [guide](https://www.baeldung.com/java-application-remote-debugging)
 
@@ -122,10 +124,12 @@ docker-compose up -d --build		# --build option will rebuild the FoodBuzz image.
 ```
 
 Now we are ready to connect the ide (eclipse, inteliJ, Visual studio code) to this debugger.
+</details>
 
-### Connect eclipse remote debugger to FoodBuzz:
+<details>
+<summary><b>Connect eclipse remote debugger to FoodBuzz</b></summary>
 
-#### Step 1: 
+#### Step 1:
 To connect remote debugger in eclipse right on the **FoodBuzz** project. Navigate to
 
 ```
@@ -169,3 +173,6 @@ Then click the `Apply` and then start debugging by clicking the `Debug` button. 
 Now hitting the `/foods` endpoint will start the debugging procedure
 
 ![Start debugging]( ./screenshots/remote-debugging/eclipse/Remote-debug-eclipse-7.png)
+</details>
+
+
