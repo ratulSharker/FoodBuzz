@@ -2,7 +2,7 @@ version: "3"
 
 services:
  foodbuzz:
-  build: ./
+  build: ./Starter
   image: foodbuzz
   container_name: fb
   ports:
