@@ -196,6 +196,30 @@ Bottom right `Add Configuration...` button may help in case of generating this `
 
 </details>
 
+<details>
+<summary><b>Connect Intellij remote debugger to FoodBuzz</b></summary>
+
+#### Step 1:
+To connect remote debugger in Intellij right on the **FoodBuzz** project. Navigate to
+
+```
+Click Edit Configuration
+```
+
+![Accessing debug configurations]( ./screenshots/remote-debugging/intellij/Remote-debug-intellij-1.png)
+
+#### Step 2:
+Now click plus `(+)` sing and select `Remote` in the popup window
+
+![Navigate to Remote Java Appliation]( ./screenshots/remote-debugging/intellij/Remote-debug-intellij-2.png)
+
+#### Step 3:
+Then put the `Name, Port and select Use module classpath`. After that please click the `Apply` button and the `OK` button.
+
+![Navigate to Remote Java Appliation]( ./screenshots/remote-debugging/intellij/Remote-debug-intellij-3.png)
+
+</details>
+
 
 ## Live reload using spring boot dev-tools:
 
